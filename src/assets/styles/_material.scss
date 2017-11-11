@@ -14,5 +14,10 @@ body {
       font-size: 1.3rem;
       font-weight: 400;
     }
+    .mat-card-content {
+      padding: $gutter;
+      margin-bottom: 0;
+      position: relative;
+    }
   }
 }
