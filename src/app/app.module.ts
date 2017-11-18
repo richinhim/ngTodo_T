@@ -14,6 +14,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import { AngularComponent } from './angular/angular.component';
 import {FormsModule} from "@angular/forms";
+import {UserService} from "./user.service";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import {FormsModule} from "@angular/forms";
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    HttpClientModule,
     AppRoutingModule,
     FlexLayoutModule,
     MatToolbarModule,
@@ -37,7 +40,7 @@ import {FormsModule} from "@angular/forms";
     MatFormFieldModule,
     MatInputModule,
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

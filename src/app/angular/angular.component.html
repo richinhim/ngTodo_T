@@ -15,7 +15,7 @@
     <form #myForm="ngForm" (ngSubmit)="add_todo()">
       <div fxLayout="row" fxLayoutAlign="center start">
         <mat-form-field fxFlex="4 1 auto">
-          <input matInput placeholder="할일" [(ngModel)]="todo" name="todo" #name="ngModel" required>
+          <input matInput placeholder="할일" [(ngModel)]="newTodo.todo" name="todo" #name="ngModel" required>
           <mat-hint align="start" style="color: red;">{{!name.value? '할일을 입력하세요' : ''}}</mat-hint>
         </mat-form-field>
         <button type="submit" mat-raised-button color="primary" fxFlex="1 1 auto"
@@ -35,6 +35,17 @@
       </tr>
       </thead>
       <tbody>
+      <tr *ngFor="let item of todoList">
+        <td>
+          <input type="checkbox" (change)="update(item)">
+        </td>
+        <td [class.todo_canceled]="item.isFinished">{{item.todo}}</td>
+        <td>{{item.created}}</td>
+        <td>{{item.updated}}</td>
+        <td>
+          <button mat-raised-button color="warn">삭제</button>
+        </td>
+      </tr>
       </tbody>
     </table>
   </mat-card-content>
