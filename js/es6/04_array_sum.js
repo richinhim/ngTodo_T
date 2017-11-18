@@ -6,5 +6,6 @@ let array3 = [6,7,8,9,10];
 
 let array4 = [...array1, ...array2, ...array3];
 let sum = 0;
-array4.forEach(item => sum += item);
+// array4.forEach(item => sum += item);
+sum = array4.reduce((prev, curr) => prev + curr)
 console.log(sum);
