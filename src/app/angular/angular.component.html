@@ -41,8 +41,8 @@
             {{item.isFinished ? '완료' : '미완료'}}
           </td>
           <td [class.todo_canceled]="item.isFinished">{{item.todo}}</td>
-          <td>{{item.created}}</td>
-          <td>{{item.updated}}</td>
+          <td>{{item.created | mydate: 'abc'}}</td>
+          <td>{{item.updated | date: 'yyyy-MM-dd a hh:mm'}}</td>
           <td>
             <button mat-raised-button color="accent" (click)="save(item)">수정</button>
             <button mat-raised-button color="warn" (click)="remove(item)">삭제</button>
