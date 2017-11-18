@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {AdminService} from "../admin.service";
 import {ResultVO} from "../../domain/result.vo";
+import {PageVO} from "../../domain/page.vo";
+import {NewsVO} from "../../domain/news.vo";
 
 @Component({
   selector: 'app-news',
@@ -9,6 +11,8 @@ import {ResultVO} from "../../domain/result.vo";
   encapsulation: ViewEncapsulation.None
 })
 export class NewsComponent implements OnInit {
+  newList = new Array<NewsVO>();
+  page = new PageVO(0, 5);
 
   constructor(private adminService: AdminService) { }
 
@@ -19,6 +23,10 @@ export class NewsComponent implements OnInit {
   findNews() {
     const page = {start_index: 0, page_size: 5};
     this.adminService.findNews(page)
-      .subscribe((data: ResultVO) => console.log(data));
+      .subscribe((result: ResultVO) => {
+        console.log(result);
+        this.newList = result.data;
+        this.page.totalCount = result.total;
+      });
   }
 }
