@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {AdminService} from "../admin.service";
+import {ResultVO} from "../../domain/result.vo";
 
 @Component({
   selector: 'app-news',
@@ -8,9 +10,15 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class NewsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private adminService: AdminService) { }
 
   ngOnInit() {
+    this.findNews();
   }
 
+  findNews() {
+    const page = {start_index: 0, page_size: 5};
+    this.adminService.findNews(page)
+      .subscribe((data: ResultVO) => console.log(data));
+  }
 }
