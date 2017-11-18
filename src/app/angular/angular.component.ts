@@ -26,6 +26,9 @@ export class AngularComponent implements OnInit {
   newTodo = new TodoVO();
   todoList = new Array<TodoVO>();
 
+  // 저정할 데이터
+  tempMap = new Map<number, TodoVO>();
+
   constructor(private userService: UserService) { }
 
   ngOnInit() {
@@ -47,5 +50,30 @@ export class AngularComponent implements OnInit {
         console.log(data);
         this.todoList = data;
       });
+  }
+
+  // 수정하는 템플릿으로 변경
+  save(item: TodoVO) {
+    item.isEdited = true;
+    // 기존값을 저장
+    const newTemp = new TodoVO();
+    newTemp.todo = item.todo;
+    newTemp.isFinished = item.isFinished;
+    this.tempMap.set(item.todo_id, newTemp);
+  }
+
+  remove(item: TodoVO) {
+
+  }
+
+  modify(item: TodoVO) {
+
+  }
+
+  restore(item: TodoVO) {
+    item.isEdited = false;
+    // 기존값을 복원
+    item.todo =  this.tempMap.get(item.todo_id).todo;
+    item.isFinished = this.tempMap.get(item.todo_id).isFinished;
   }
 }
