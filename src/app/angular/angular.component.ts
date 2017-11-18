@@ -20,6 +20,8 @@ export class AngularComponent implements OnInit {
 
   add_todo() {
     console.log('click');
+    this.userService.addTodo(this.newTodo)
+      .then((data: TodoVO) => this.todoList.unshift(data));
   }
 
   getTodoList() {
