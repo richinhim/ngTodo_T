@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {TodoVO} from "../domain/todo.vo";
 import {UserService} from "../user.service";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {ResultVO} from "../domain/result.vo";
 
 @Component({
   selector: 'app-angular',
@@ -63,11 +64,29 @@ export class AngularComponent implements OnInit {
   }
 
   remove(item: TodoVO) {
-
+    const result = window.confirm("삭제하시겠습니까?");
+    if (result) {
+      // 서버에 삭제요청을 하고 성공하면 arraylist에서 제거
+      this.userService.removeTodo(item.todo_id)
+        .then((data: ResultVO) => {
+          if (data.result === 0) {
+            // 목록에서 제거
+            const index = this.todoList.findIndex(value => value.todo_id === item.todo_id);
+            this.todoList.splice(index, 1);
+          }
+        });
+    }
   }
 
   modify(item: TodoVO) {
-
+    // 서버에 수정요청하고 성공시 원 템플릿으로 복원
+    this.userService.modifyTodo(item)
+      .then((data: TodoVO) => {
+        item.isFinished = data.isFinished;
+        item.todo = data.todo;
+        item.updated = data.updated;
+        item.isEdited = false;
+      });
   }
 
   restore(item: TodoVO) {
