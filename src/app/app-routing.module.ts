@@ -11,8 +11,8 @@ const routes: Routes = [
     { path: 'jquery', component: JqueryComponent},
     { path: 'angular', component: AngularComponent},
   ]},
-// 참고: 향후 관리자 생성 모듈
-// { path: 'admin', loadChildren: 'app/admin/admin.module#AdminModule'}
+    // 참고: 향후 관리자 생성 모듈 - lazy loading
+    { path: 'admin', loadChildren: 'app/admin/admin.module#AdminModule'}
 ];
 
 @NgModule({
