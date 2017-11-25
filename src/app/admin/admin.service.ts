@@ -20,4 +20,7 @@ export class AdminService {
       {headers: this.headers});
   }
 
+  findOneNews(params: number) {
+    return this.http.get(this.SERVER + `/api/news?news_id=${params}`);
+  }
 }
