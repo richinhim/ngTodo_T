@@ -21,7 +21,10 @@ export class NewsComponent implements OnInit {
   }
 
   findNews() {
-    const page = {start_index: 0, page_size: 5};
+    const page = {
+      start_index: this.page.pageIndex * this.page.pageSize,
+      page_size: this.page.pageSize
+    };
     this.adminService.findNews(page)
       .subscribe((result: ResultVO) => {
         console.log(result);
@@ -29,4 +32,11 @@ export class NewsComponent implements OnInit {
         this.page.totalCount = result.total;
       });
   }
+
+  pageChanged(event: any) {
+    this.page.pageIndex = event.pageIndex;
+    this.page.pageSize = event.pageSize;
+    this.findNews();
+  }
+
 }
