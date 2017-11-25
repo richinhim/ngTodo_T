@@ -11,7 +11,7 @@ import {NewsVO} from "../../domain/news.vo";
   encapsulation: ViewEncapsulation.None
 })
 export class NewsComponent implements OnInit {
-  newList = new Array<NewsVO>();
+  newsList = new Array<NewsVO>();
   page = new PageVO(0, 5);
 
   constructor(private adminService: AdminService) { }
@@ -25,7 +25,7 @@ export class NewsComponent implements OnInit {
     this.adminService.findNews(page)
       .subscribe((result: ResultVO) => {
         console.log(result);
-        this.newList = result.data;
+        this.newsList = result.data;
         this.page.totalCount = result.total;
       });
   }
